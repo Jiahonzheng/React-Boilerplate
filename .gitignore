@@ -1,0 +1,19 @@
+# OSX
+#
+.DS_Store
+
+# editors
+#
+.vscode
+.idea
+.vs
+
+# node modules
+#
+node_modules
+package-lock.json
+npm-debug.log
+
+# distribution
+#
+dist
