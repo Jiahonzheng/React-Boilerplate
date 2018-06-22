@@ -4,14 +4,14 @@ export const WILL_FETCH_TEST_DATA = "WILL_FETCH_TEST_DATA";
 
 export const DID_FETCH_TEST_DATA = "DID_FETCH_TEST_DATA";
 
-export const fetchTestData = (params) => ({
-  type: FETCH_TEST_DATA,
-  payload: params
+export const CLEAR = "CLEAR"
+
+export const fetchTestData = () => ({
+  type: FETCH_TEST_DATA
 });
 
-export const willFetchTestData = (params) => ({
-  type: WILL_FETCH_TEST_DATA,
-  payload: params
+export const willFetchTestData = () => ({
+  type: WILL_FETCH_TEST_DATA
 });
 
 export const didFetchTestData = (params) => ({
@@ -19,8 +19,13 @@ export const didFetchTestData = (params) => ({
   payload: params
 });
 
+export const clear = (params) => ({
+  type: CLEAR
+})
+
 export default {
   fetchTestData,
   willFetchTestData,
-  didFetchTestData
+  didFetchTestData,
+  clear
 };

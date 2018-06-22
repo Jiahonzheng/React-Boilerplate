@@ -6,12 +6,11 @@ import {
 } from "./TestActions";
 import fetch from "../../api/fetch";
 
-function* fetchTestSaga(payload) {
+function* fetchTestSaga() {
   try {
     yield put(willFetchTestData());
-    const data = yield call(fetch, "http://127.0.0.1:3000", "GET");
-    console.log(data)
-    yield put(didFetchTestData({hello: "react"}));
+    const message = yield call(fetch, "http://127.0.0.1:3000/test", "GET");
+    yield put(didFetchTestData(message));
   } catch (err) {
     console.log(err);
   }
@@ -19,7 +18,7 @@ function* fetchTestSaga(payload) {
 
 export function* watchTestSaga() {
   while (true) {
-    const payload = yield take(FETCH_TEST_DATA);
-    yield fork(fetchTestSaga, payload);
+    yield take(FETCH_TEST_DATA);
+    yield fork(fetchTestSaga);
   }
 }

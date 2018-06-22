@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "description": "A boilerplate of React",
   "scripts": {
-    "dev-client": "webpack-dev-server --config build/webpack.client.dev.js",
-    "build": "webpack --config build/webpack.config.prod.js"
+    "build": "webpack --config build/webpack.config.prod.js",
+    "backend": "node test/backend.js",
+    "dev-client": "webpack-dev-server --config build/webpack.client.dev.js"
   },
   "dependencies": {
     "react": "^16.3.2",
