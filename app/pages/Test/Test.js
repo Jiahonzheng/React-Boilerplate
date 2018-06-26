@@ -27,13 +27,9 @@ class Test extends React.Component {
     }
 
     if (props.testReducer.message !== this.state.message) {
-      return setTimeout(
-        () =>
-          this.setState({
-            message: props.testReducer.message
-          }),
-        1000
-      );
+      return this.setState({
+        message: props.testReducer.message
+      });
     }
   }
 

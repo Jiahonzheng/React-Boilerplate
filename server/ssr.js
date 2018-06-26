@@ -39,7 +39,7 @@ const JSX = function(store, persistor) {
 };
 
 function ssr(req, res) {
-  const INITIAL_STATE = {hello: "TEST"};
+  const INITIAL_STATE = {testReducer: {message: "Hello SSR"}};
   const {store, persistor} = Store(INITIAL_STATE, true)();
   const reactDOM = renderToString(JSX(store, persistor));
 
