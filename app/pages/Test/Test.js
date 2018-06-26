@@ -15,7 +15,9 @@ class Test extends React.Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.testAction.fetchTestData();
+  }
 
   componentWillReceiveProps(props) {
     if (this.state.message) {

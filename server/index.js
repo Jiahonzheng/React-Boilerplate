@@ -1,10 +1,16 @@
-const http = require("http");
-const static = require("./static");
+const express = require("express");
+const path = require("path");
+
+import SSR from "./ssr";
 
 const PORT = 8887;
 
-function server(req, res) {
-  static(req, res);
-}
+const app = express();
 
-http.createServer(server).listen(PORT);
+app.use(express.static(path.resolve(__dirname, "../dist/client/")));
+
+app.get("/*", function(req, res) {
+  SSR(req, res);
+});
+
+app.listen(PORT);
