@@ -26,7 +26,15 @@ npm i
 #
 npm run backend
 
-# 运行 React-Boilerplate 实例
+# React-Boilerplate 开发模式
 #
 npm run dev-client
+
+# React-Boilerplate 生产模式
+#
+npm run build-client
+
+# 服务端渲染 开发模式
+#
+npm run dev-server
 ```
