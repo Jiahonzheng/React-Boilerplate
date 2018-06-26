@@ -6,9 +6,9 @@ import Main from "./pages/Main/Main";
 import {PersistGate} from "redux-persist/lib/integration/react";
 
 const MOUNT_NODE = document.getElementById("app");
-const INITIAL_STATE = {};
+const INITIAL_STATE = window.INITIAL_STATE || {};
 
-const {store, persistor} = Store(INITIAL_STATE, true)();
+const {store, persistor} = Store(INITIAL_STATE, false)();
 
 class App extends React.Component {
   constructor(props) {
@@ -22,9 +22,9 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        {/* <PersistGate persistor={persistor}> */}
+        <PersistGate persistor={persistor}>
           <Main />
-        {/* </PersistGate> */}
+        </PersistGate>
       </Provider>
     );
   }

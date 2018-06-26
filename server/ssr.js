@@ -6,7 +6,7 @@ import {StaticRouter} from "react-router-dom";
 import Store from "../app/store";
 import Main from "../app/pages/Main/Main";
 
-function HTMLTemplate(reactDOM) {
+function HTMLTemplate(reactDOM, initialState) {
   return `
   <!DOCTYPE html>
   <html>
@@ -18,6 +18,9 @@ function HTMLTemplate(reactDOM) {
   
   <body>
     <div id="app">${reactDOM}</div>
+    <script>
+      window.INITIAL_STATE = ${JSON.stringify(initialState)};
+    </script>
     <script src="bundle.js"></script>
   </body>
   
@@ -28,19 +31,20 @@ function HTMLTemplate(reactDOM) {
 const JSX = function(store, persistor) {
   return (
     <Provider store={store}>
-      {/* <PersistGate persistor={persistor}> */}
-      <Main />
-      {/* </PersistGate> */}
+      <PersistGate persistor={persistor}>
+        <Main />
+      </PersistGate>
     </Provider>
   );
 };
 
 function ssr(req, res) {
-  const {store} = Store({}, true)();
-  const reactDOM = renderToString(JSX(store));
+  const INITIAL_STATE = {hello: "TEST"};
+  const {store, persistor} = Store(INITIAL_STATE, true)();
+  const reactDOM = renderToString(JSX(store, persistor));
 
   res.writeHead(200, {"Content-Type": "text/html"});
-  res.end(HTMLTemplate(reactDOM));
+  res.end(HTMLTemplate(reactDOM, INITIAL_STATE));
 }
 
 export default ssr;

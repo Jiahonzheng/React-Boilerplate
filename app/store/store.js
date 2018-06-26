@@ -1,13 +1,13 @@
 import {applyMiddleware, compose, createStore, combineReducers} from "redux";
 import createSagaMiddleware from "redux-saga";
 import {fork, all} from "redux-saga/effects";
-// import {persistReducer, persistStore} from "redux-persist";
-// import storage from "redux-persist/lib/storage";
+import {persistReducer, persistStore} from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import {logger} from "redux-logger";
 
 const PERSIST_CONFIG = {
-  key: "root"
-  // storage: storage
+  key: "root",
+  storage: storage
 };
 
 const makeRootSaga = (sagas) => {
