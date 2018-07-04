@@ -1,0 +1,4 @@
+{
+  "verbose": false,
+  "ignore": ["app", "build", "dist", "test"]
+}
