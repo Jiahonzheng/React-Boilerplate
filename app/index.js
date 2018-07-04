@@ -7,7 +7,6 @@ import {PersistGate} from "redux-persist/lib/integration/react";
 
 const MOUNT_NODE = document.getElementById("app");
 const INITIAL_STATE = window.INITIAL_STATE || {};
-
 const {store, persistor} = Store(INITIAL_STATE, false)();
 
 class App extends React.Component {
