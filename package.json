@@ -5,7 +5,7 @@
   "scripts": {
     "build": "npm run build:client && npm run build:server",
     "start:backend": "node test/backend.js",
-    "start:dev": "babel-node server/index.js -b env,react,stage-2",
+    "start:dev": "babel-node server/dev.js -b env,react,stage-2",
     "start:prod": "nodemon server/index.js --exec babel-node -b env,react,stage-2",
     "build:client": "webpack --config build/webpack.client.prod.js",
     "build:server": "webpack --config build/webpack.server.prod.js"
