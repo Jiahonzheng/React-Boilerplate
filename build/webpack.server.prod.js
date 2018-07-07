@@ -1,26 +1,38 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const NodeExternalsPlugin = require("webpack-node-externals");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyPlugin = require("uglifyjs-webpack-plugin");
 
 const config = {
   mode: "production",
-  entry: path.join(__dirname, "../app/index.js"),
+  entry: path.join(__dirname, "../server/prod.js"),
   output: {
     filename: "bundle.js",
-    path: path.join(__dirname, "../dist/client/")
+    path: path.join(__dirname, "../dist/server/")
   },
   node: {
     __dirname: true
   },
-  target: "web",
+  target: "node",
   module: {
     rules: [
       {
         test: /\.js$/,
         loader: "babel-loader",
         options: {
-          presets: ["react", "stage-2"]
+          presets: [
+            "react",
+            "stage-2",
+            [
+              "env",
+              {
+                targets: {
+                  node: "current"
+                }
+              }
+            ]
+          ]
         },
         exclude: [path.join(__dirname, "../node_modules/")]
       },
@@ -42,6 +54,8 @@ const config = {
       chunkFilename: "[id].css"
     })
   ],
+  devtool: "none",
+  externals: [NodeExternalsPlugin()],
   optimization: {
     minimizer: [
       new UglifyPlugin({
