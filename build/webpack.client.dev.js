@@ -2,9 +2,11 @@ const path = require("path");
 const webpack = require("webpack");
 const HTMLPlugin = require("html-webpack-plugin");
 
+const HOT_MIDDLEWARE_SCRIPT = "webpack-hot-middleware/client?reload=true";
+
 const config = {
   mode: "development",
-  entry: path.join(__dirname, "../app/index.js"),
+  entry: [path.join(__dirname, "../app/index.js"), HOT_MIDDLEWARE_SCRIPT],
   output: {
     filename: "bundle.js",
     path: path.join(__dirname, "../dist/client/")
@@ -32,16 +34,7 @@ const config = {
       template: path.join(__dirname, "../app/index.html")
     })
   ],
-  devtool: "source-map",
-  devServer: {
-    port: "8888",
-    contentBase: path.join(__dirname, "../dist/client/"),
-    clientLogLevel: "none",
-    compress: true,
-    open: true,
-    inline: true,
-    hot: true
-  }
+  devtool: "source-map"
 };
 
 module.exports = config;
