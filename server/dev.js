@@ -2,8 +2,8 @@ const bs = require("browser-sync").create();
 const express = require("express");
 const webpack = require("webpack");
 const config = require("../build/webpack.client.dev");
+const {PORT} = require("../config");
 
-const PORT = 8887;
 const app = express();
 const worker = webpack(config);
 
