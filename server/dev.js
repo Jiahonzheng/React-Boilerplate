@@ -1,7 +1,8 @@
 const bs = require("browser-sync").create();
-const express = require("express");
-const webpack = require("webpack");
 const config = require("../build/webpack.client.dev");
+const express = require("express");
+const path = require("path");
+const webpack = require("webpack");
 const {PORT} = require("../config");
 
 const app = express();
@@ -27,6 +28,20 @@ bs.init({
   notify: false,
   proxy: "localhost:8887",
   port: 8080
+});
+
+app.get("*", function(req, res) {
+  const filename = path.join(worker.outputPath, "index.html");
+
+  worker.outputFileSystem.readFile(filename, function(err, file) {
+    if (err) {
+      return res.end("404");
+    }
+
+    res.set("content-type", "text/html");
+    res.send(file);
+    res.end();
+  });
 });
 
 app.listen(PORT);

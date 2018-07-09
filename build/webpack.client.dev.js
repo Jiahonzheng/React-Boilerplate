@@ -31,7 +31,9 @@ const config = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HTMLPlugin({
-      template: path.join(__dirname, "../app/index.html")
+      template: path.join(__dirname, "../app/index.html"),
+      filename: "index.html",
+      inject: "body"
     })
   ],
   devtool: "source-map"
