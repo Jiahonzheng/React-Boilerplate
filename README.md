@@ -24,17 +24,13 @@ npm i
 
 # 运行 API 服务器
 #
-npm run backend
+npm run start:backend
 
-# React-Boilerplate 开发模式
+# React-Boilerplate 开发模式(客户端渲染)
 #
-npm run dev-client
+npm run start:dev
 
-# React-Boilerplate 生产模式
+# React-Boilerplate 生产模式(服务端渲染)
 #
-npm run build-client
-
-# 服务端渲染 开发模式
-#
-npm run dev-server
+npm run start:prod
 ```
