@@ -4,7 +4,7 @@ import React from "react";
 import {renderToString} from "react-dom/server";
 import {Provider} from "react-redux";
 import {PersistGate} from "redux-persist/lib/integration/react";
-import {StaticRouter} from "react-router-dom";
+import {StaticRouter, Route} from "react-router-dom";
 import Store from "../app/store";
 import Main from "../app/pages/Main/Main";
 const {PORT} = require("../config");
@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, "../dist/client/")));
 app.get("/*", function(req, res) {
   const INITIAL_STATE = {testReducer: {message: "Hello SSR"}};
   const {store, persistor} = Store(INITIAL_STATE, true)();
-  const reactDOM = renderToString(JSX(store, persistor));
+  const reactDOM = renderToString(JSX(store, persistor, req.url, {}));
 
   res.writeHead(200, {"Content-Type": "text/html"});
   res.end(HTMLTemplate(reactDOM, INITIAL_STATE));
@@ -31,6 +31,7 @@ function HTMLTemplate(reactDOM, initialState) {
   <head>
     <meta charset="utf-8">
     <title>React-Boilerplate</title>
+    <link rel="stylesheet" type="text/css" href="./main.css" />
   </head>
   
   <body>
@@ -44,11 +45,13 @@ function HTMLTemplate(reactDOM, initialState) {
   </html>
   `;
 }
-function JSX(store, persistor) {
+function JSX(store, persistor, url, context) {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <Main />
+        <StaticRouter location={url} context={context}>
+          <Route children={({match}) => <Main match={match} />} />
+        </StaticRouter>
       </PersistGate>
     </Provider>
   );

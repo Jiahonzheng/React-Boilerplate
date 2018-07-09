@@ -1,7 +1,10 @@
 import React from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 import testActionCreator from "../Test/TestActions";
+
+import "../../test.css"
 
 class Test extends React.Component {
   constructor(props) {
@@ -56,6 +59,8 @@ class Test extends React.Component {
         <br />
         <button onClick={this.onFetchButtonPressed}>FETCH</button>
         <button onClick={this.onClearButtonPressed}>CLEAR</button>
+        <br />
+        <Link to="/">Back to Root</Link>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 import {Provider} from "react-redux";
 import Store from "./store";
 import Main from "./pages/Main/Main";
@@ -22,7 +23,9 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <PersistGate persistor={persistor}>
-          <Main />
+          <BrowserRouter>
+            <Route children={({match}) => <Main match={match} />} />
+          </BrowserRouter>
         </PersistGate>
       </Provider>
     );
