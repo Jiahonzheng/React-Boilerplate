@@ -4,7 +4,7 @@ export const WILL_FETCH_TEST_DATA = "WILL_FETCH_TEST_DATA";
 
 export const DID_FETCH_TEST_DATA = "DID_FETCH_TEST_DATA";
 
-export const CLEAR = "CLEAR"
+export const CLEAR = "CLEAR";
 
 export const fetchTestData = () => ({
   type: FETCH_TEST_DATA
@@ -21,7 +21,7 @@ export const didFetchTestData = (params) => ({
 
 export const clear = (params) => ({
   type: CLEAR
-})
+});
 
 export default {
   fetchTestData,

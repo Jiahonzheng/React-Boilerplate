@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "description": "A boilerplate of React",
   "scripts": {
-    "build": "npm run build:client && npm run build:server",
+    "prettier": "node_modules/.bin/prettier -.prettierrc -config ./ --loglevel silent --write \"./**/*.js\"",
+    "build": "npm run prettier && npm run build:client && npm run build:server",
     "start:backend": "node test/backend.js",
     "start:dev": "node server/dev.js",
     "start:prod": "npm run build && node dist/server/bundle.js",
@@ -33,6 +34,7 @@
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.1",
     "optimize-css-assets-webpack-plugin": "^4.0.3",
+    "prettier": "^1.14.0",
     "redux-devtools-extension": "^2.13.5",
     "redux-logger": "^3.0.6",
     "style-loader": "^0.21.0",
