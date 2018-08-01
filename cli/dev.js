@@ -3,7 +3,7 @@ const config = require("../build/webpack.client.dev");
 const express = require("express");
 const path = require("path");
 const webpack = require("webpack");
-const {PORT} = require("../config");
+const {PORT_FRONTEND} = require("../config");
 
 const app = express();
 const worker = webpack(config);
@@ -20,13 +20,14 @@ app.use(
     }
   })
 );
+
 app.use(require("webpack-hot-middleware")(worker));
 
 bs.init({
   open: true,
   ui: false,
   notify: false,
-  proxy: "localhost:8887",
+  proxy: `localhost:${PORT_FRONTEND}`,
   port: 8080
 });
 
@@ -44,4 +45,4 @@ app.get("*", function(req, res) {
   });
 });
 
-app.listen(PORT);
+app.listen(PORT_FRONTEND);

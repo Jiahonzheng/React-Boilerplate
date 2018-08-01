@@ -1,5 +1,8 @@
-const PORT = 8887;
+const DEBUG = true;
+
+const PORT_FRONTEND = 8887;
 
 module.exports = {
-  PORT
+  DEBUG,
+  PORT_FRONTEND
 };

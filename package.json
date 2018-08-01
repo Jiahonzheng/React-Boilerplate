@@ -6,8 +6,8 @@
     "prettier": "node_modules/.bin/prettier -.prettierrc -config ./ --loglevel silent --write \"./**/*.js\"",
     "build": "npm run prettier && npm run build:client && npm run build:server",
     "start:backend": "node test/backend.js",
-    "start:dev": "node server/dev.js",
-    "start:prod": "npm run build && node dist/server/bundle.js",
+    "start:dev": "node cli/dev.js",
+    "start:prod": "npm run build && node dist/ssr/bundle.js",
     "build:client": "webpack --config build/webpack.client.prod.js",
     "build:server": "webpack --config build/webpack.server.prod.js"
   },
