@@ -1,11 +1,12 @@
+const {DEBUG} = require("../../config");
+
+const BASE_URL = DEBUG ? "" : "";
+
 const request = (url, method, body, type) => {
-  let isOk;
   let options = {
     credentials: "same-origin",
     method
   };
-
-  const data = type !== undefined ? body : JSON.stringify(body);
 
   if (type !== undefined) {
     options = {
@@ -13,7 +14,7 @@ const request = (url, method, body, type) => {
       headers: {
         "Content-Type": "multipart/form-data"
       },
-      body: data
+      body
     };
   } else {
     options = {
@@ -22,27 +23,12 @@ const request = (url, method, body, type) => {
         Accept: "application/json",
         "Content-Type": "application/json;charset=utf-8"
       },
-      body: data
+      body: JSON.stringify(body)
     };
   }
 
-  return new Promise((resolve, reject) => {
-    fetch(url, options)
-      .then((response) => {
-        isOk = response.ok;
-
-        return response.json();
-      })
-      .then((responseData) => {
-        if (isOk) {
-          resolve(responseData);
-        } else {
-          reject(responseData);
-        }
-      })
-      .catch((error) => {
-        reject(error);
-      });
+  return fetch(BASE_URL + url, options).then((response) => {
+    return response.json();
   });
 };
 
