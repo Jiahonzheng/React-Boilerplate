@@ -4,11 +4,10 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Provider} from "react-redux";
 import Store from "./store";
 import Main from "./pages/Main/Main";
-import {PersistGate} from "redux-persist/lib/integration/react";
 
 const MOUNT_NODE = document.getElementById("app");
 const INITIAL_STATE = window.INITIAL_STATE || {};
-const {store, persistor} = Store(INITIAL_STATE, false)();
+const {store} = Store(INITIAL_STATE)();
 
 class App extends React.Component {
   constructor(props) {
@@ -22,11 +21,9 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <PersistGate persistor={persistor}>
-          <BrowserRouter>
-            <Route children={({match}) => <Main match={match} />} />
-          </BrowserRouter>
-        </PersistGate>
+        <BrowserRouter>
+          <Route children={({match}) => <Main match={match} />} />
+        </BrowserRouter>
       </Provider>
     );
   }

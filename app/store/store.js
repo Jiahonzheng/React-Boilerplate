@@ -3,8 +3,6 @@ import createSagaMiddleware from "redux-saga";
 import {fork, all} from "redux-saga/effects";
 import {logger} from "redux-logger";
 import {composeWithDevTools} from "redux-devtools-extension";
-import {persistReducer, persistStore} from "redux-persist";
-import storage from "redux-persist/lib/storage";
 
 const makeRootSaga = (sagas) => {
   return function* rootSaga() {
@@ -12,7 +10,7 @@ const makeRootSaga = (sagas) => {
   };
 };
 
-export default (initialState = {}, reducers = {}, sagas = [], IS_SERVER) => {
+export default (initialState = {}, reducers = {}, sagas = []) => {
   const sagaMiddleware = createSagaMiddleware();
   const middlewares = [];
 
@@ -29,19 +27,6 @@ export default (initialState = {}, reducers = {}, sagas = [], IS_SERVER) => {
 
   if (process.env.NODE_ENV === `development`) {
     enhancer = composeWithDevTools(rootMiddleware);
-  }
-
-  if (!IS_SERVER) {
-    const PERSIST_CONFIG = {
-      key: "root",
-      storage: storage
-    };
-    const persistRootReducer = persistReducer(PERSIST_CONFIG, rootReducer);
-    const store = createStore(persistRootReducer, initialState, enhancer);
-    const persistor = persistStore(store);
-
-    sagaMiddleware.run(rootSaga);
-    return {store, persistor};
   }
 
   const store = createStore(rootReducer, initialState, enhancer);

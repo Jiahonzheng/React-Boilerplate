@@ -8,5 +8,5 @@ const reducers = {
 
 const sagas = [watchTestSaga];
 
-export default (initialState = {}, IS_SERVER) => () =>
-  Store(initialState, reducers, sagas, IS_SERVER);
+export default (initialState = {}) => () =>
+  Store(initialState, reducers, sagas);
