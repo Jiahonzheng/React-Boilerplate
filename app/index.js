@@ -32,4 +32,8 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.hydrate(<App />, MOUNT_NODE);
+if (process.env.NODE_ENV === `development`) {
+  ReactDOM.render(<App />, MOUNT_NODE);
+} else {
+  ReactDOM.hydrate(<App />, MOUNT_NODE);
+}
