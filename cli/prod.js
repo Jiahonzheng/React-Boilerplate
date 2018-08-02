@@ -7,7 +7,7 @@ import {PersistGate} from "redux-persist/lib/integration/react";
 import {StaticRouter, Route} from "react-router-dom";
 import Store from "../app/store";
 import Main from "../app/pages/Main/Main";
-const {PORT} = require("../config");
+const {PORT_FRONTEND} = require("../config");
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.get("/*", function(req, res) {
   res.end(HTMLTemplate(reactDOM, INITIAL_STATE));
 });
 
-app.listen(PORT);
+app.listen(PORT_FRONTEND);
 
 function HTMLTemplate(reactDOM, initialState) {
   return `
@@ -50,7 +50,7 @@ function JSX(store, persistor, url, context) {
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <StaticRouter location={url} context={context}>
-          <Route children={({match}) => <Main match={match} />} />
+          <Main />
         </StaticRouter>
       </PersistGate>
     </Provider>

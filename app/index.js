@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {BrowserRouter, Route} from "react-router-dom";
+import {HashRouter as Router} from "react-router-dom";
 import {Provider} from "react-redux";
 import Store from "./store";
 import Main from "./pages/Main/Main";
@@ -21,9 +21,9 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <BrowserRouter>
-          <Route children={({match}) => <Main match={match} />} />
-        </BrowserRouter>
+        <Router>
+          <Main />
+        </Router>
       </Provider>
     );
   }

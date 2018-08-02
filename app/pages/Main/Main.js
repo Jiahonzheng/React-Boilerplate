@@ -1,25 +1,35 @@
 import React from "react";
 import {connect} from "react-redux";
-import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
+import {Route, Link, Switch, withRouter} from "react-router-dom";
 import Test from "../Test/Test";
 
 import "../../test.css";
 
-class Main extends React.Component {
+class Header extends React.Component {
   render() {
     return (
       <div>
-        <Route path="/test" component={() => <Test />} />
-        <Route
-          exact
-          path="/"
-          component={() => (
-            <div>
-              <p>Root Path</p>
-              <Link to="/test">/test</Link>
-            </div>
-          )}
-        />
+        Header
+        <Link to="/">Index</Link>
+        <Link to="/test">Test</Link>
+      </div>
+    );
+  }
+}
+
+class Main extends React.Component {
+  renderTest() {
+    return <Test />;
+  }
+
+  render() {
+    return (
+      <div>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={() => <div>Index</div>} />
+          <Route path="/test" component={this.renderTest} />
+        </Switch>
       </div>
     );
   }
@@ -29,4 +39,4 @@ const mapStateToProps = (state) => {
   return {...state};
 };
 
-export default connect(mapStateToProps)(Main);
+export default withRouter(connect(mapStateToProps)(Main));
