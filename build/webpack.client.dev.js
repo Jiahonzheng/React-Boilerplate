@@ -29,6 +29,11 @@ const config = {
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_DEV: "development"
+      }
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new HTMLPlugin({
       template: path.join(__dirname, "../app/index.html"),

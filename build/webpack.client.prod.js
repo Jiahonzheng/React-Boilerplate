@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyPlugin = require("uglifyjs-webpack-plugin");
@@ -37,6 +38,11 @@ const config = {
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_DEV: "production"
+      }
+    }),
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css"
